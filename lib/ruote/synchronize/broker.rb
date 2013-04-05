@@ -1,0 +1,46 @@
+module Ruote
+  module Synchronize
+
+    class Broker
+
+      include ReceiverMixin
+
+      def initialize(context)
+        @context = context
+        @context.storage.add_type('synchronize')
+        @context.dashboard.register_participant 'synchronize', Ruote::Synchronize::Participant
+      end
+
+      def publish(key, workitem)
+
+        ret = @context.storage.get('synchronize', key)
+        if ret
+          ret_workitem = ret['workitem']
+          receive(ret_workitem)
+          @context.storage.delete(ret)
+          ret_workitem
+        else
+
+          doc = {
+            'type' => 'synchronize',
+            '_id' => key,
+            'workitem' => workitem
+          }
+          @context.storage.put(doc)
+
+        end
+
+      end
+
+      def unpublish(key)
+
+        if doc = @context.storage.get('synchronize', key)
+          @context.storage.delete(doc)
+        end
+
+      end
+
+    end
+
+  end
+end
