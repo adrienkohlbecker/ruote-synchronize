@@ -14,7 +14,7 @@ module Synchronize
       key = workitem.fields['params']['key']
       raise "Key is not defined" if key.nil?
 
-      unless broker.publish(key, workitem.to_h).nil?
+      if broker.publish(key, workitem.to_h)
         reply
       end
 

@@ -11,14 +11,14 @@ module Ruote
         @context.dashboard.register_participant 'synchronize', Ruote::Synchronize::Participant
       end
 
-      def publish(key, workitem)
+      def publish(key, workitem=nil)
 
         ret = @context.storage.get('synchronize', key)
         if ret
           ret_workitem = ret['workitem']
-          receive(ret_workitem)
+          receive(ret_workitem) unless workitem.nil?
           @context.storage.delete(ret)
-          ret_workitem
+          return true
         else
 
           doc = {
@@ -27,6 +27,8 @@ module Ruote
             'workitem' => workitem
           }
           @context.storage.put(doc)
+
+          return false
 
         end
 
