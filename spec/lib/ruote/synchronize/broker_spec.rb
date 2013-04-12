@@ -51,8 +51,8 @@ describe Ruote::Synchronize::Broker do
         expect(@board.context.storage.get('synchronize', key)['workitem']).to eq(workitem)
       end
 
-      it 'returns nil' do
-        expect(sync.publish(key, workitem)).to be_nil
+      it 'returns false' do
+        expect(sync.publish(key, workitem)).to be_false
       end
 
     end
@@ -71,8 +71,8 @@ describe Ruote::Synchronize::Broker do
 
       end
 
-      it 'returns the previous workitem' do
-        expect(sync.publish(key, another_workitem)).to eq(workitem)
+      it 'returns true' do
+        expect(sync.publish(key, another_workitem)).to be_true
       end
 
       it 'receives the previous workitem' do
