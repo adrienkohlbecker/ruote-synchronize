@@ -16,7 +16,7 @@ module Ruote
         ret = @context.storage.get('synchronize', key)
         if ret
           ret_workitem = ret['workitem']
-          receive(ret_workitem) unless workitem.nil?
+          receive(ret_workitem) unless ret_workitem.nil?
           @context.storage.delete(ret)
           return true
         else
