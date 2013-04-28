@@ -8,11 +8,7 @@ module Ruote
       include Ruote::ReceiverMixin
 
       def initialize(context)
-        @context = context # needed for ReceiverMixin
-        @storage = @context.storage
-        @storage.add_type 'synchronize'
-
-        @context.dashboard.register_participant 'synchronize', Ruote::Synchronize::Participant
+        @context = context
       end
 
       def publish(key, workitem)
@@ -33,20 +29,20 @@ module Ruote
 
       def unpublish(key)
         doc = stored_doc_from_key(key)
-        @storage.delete(doc) if doc
+        @context.storage.delete(doc) if doc
       end
 
       private
 
       def stored_doc_from_key(key)
-        @storage.get('synchronize', key)
+        @context.storage.get('synchronize', key)
       end
 
       def continue_with(doc)
 
         stored_workitem = Ruote::Workitem.new(doc['workitem'])
         receive(stored_workitem)
-        @storage.delete(doc)
+        @context.storage.delete(doc)
 
       end
 
@@ -57,7 +53,7 @@ module Ruote
           '_id' => key,
           'workitem' => workitem.to_h
         }
-        @storage.put(doc)
+        @context.storage.put(doc)
 
       end
 

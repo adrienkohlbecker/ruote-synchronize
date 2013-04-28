@@ -12,6 +12,8 @@ describe Ruote::Synchronize::Broker do
       workitem.fields[workitem.participant_name] = 'was here'
     end
 
+    Ruote::Synchronize.setup(@board)
+
   end
 
   after :each do
