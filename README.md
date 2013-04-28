@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/adrienkohlbecker/ruote-synchronize.png)](https://travis-ci.org/adrienkohlbecker/ruote-synchronize) [![Code Climate](https://codeclimate.com/github/adrienkohlbecker/ruote-synchronize.png)](https://codeclimate.com/github/adrienkohlbecker/ruote-synchronize) [![Dependency Status](https://gemnasium.com/adrienkohlbecker/ruote-synchronize.png)](https://gemnasium.com/adrienkohlbecker/ruote-synchronize)
+[![Build Status](https://travis-ci.org/adrienkohlbecker/ruote-synchronize.png)](https://travis-ci.org/adrienkohlbecker/ruote-synchronize) [![Coverage Status](https://coveralls.io/repos/adrienkohlbecker/ruote-synchronize/badge.png?branch=master)](https://coveralls.io/r/adrienkohlbecker/ruote-synchronize) [![Code Climate](https://codeclimate.com/github/adrienkohlbecker/ruote-synchronize.png)](https://codeclimate.com/github/adrienkohlbecker/ruote-synchronize) [![Dependency Status](https://gemnasium.com/adrienkohlbecker/ruote-synchronize.png)](https://gemnasium.com/adrienkohlbecker/ruote-synchronize)
 
 # Ruote::Synchronize
 

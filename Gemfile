@@ -12,3 +12,7 @@ end
 group :development do
   gem 'rubocop' unless RUBY_VERSION < '1.9'
 end
+
+group :development, :test do
+  gem 'coveralls', :require => false
+end
