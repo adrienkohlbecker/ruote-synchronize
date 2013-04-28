@@ -6,8 +6,8 @@
 - **Rdoc**: [rdoc.info/gems/ruote-synchronize](http://rdoc.info/gems/ruote-synchronize)
 - **Author**: Adrien Kohlbecker
 - **License**: MIT License
-- **Latest Version**: 0.1.0 (unreleased)
-- **Release Date**: none
+- **Latest Version**: 0.1.0
+- **Release Date**: April 29, 2013
 
 ## Synopsis
 
@@ -76,3 +76,8 @@ Or install it yourself as:
 4. Push to the branch (`git push origin my-new-feature`)
 5. Run the tests (`bundle exec rspec`)
 6. Create new Pull Request
+
+## Changelog
+
+- **April 29, 2013**: 0.1.0 release
+    - Initial release
