@@ -41,7 +41,7 @@ module Ruote
 
     # Will register the `synchronize` storage type and participant.
     # You need to execute this method before launching any processes.
-    # @param [Ruote::Dashboard, Ruote::Engine] your Ruote dashboard.
+    # @param [Ruote::Dashboard, Ruote::Engine] dashboard your Ruote dashboard.
     # @return [void]
     def self.setup(dashboard)
 
