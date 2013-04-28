@@ -1,5 +1,10 @@
+# encoding: UTF-8
+
 module Ruote
 module Synchronize
+
+  class UndefinedKey < RuntimeError
+  end
 
   class Participant
 
@@ -11,18 +16,16 @@ module Synchronize
 
     def on_workitem
 
-      key = workitem.fields['params']['key']
-      raise "Key is not defined" if key.nil?
+      key = workitem.lookup('params.key')
+      raise UndefinedKey if key.nil?
 
-      if broker.publish(key, workitem.to_h)
-        reply
-      end
+      reply if broker.publish(key, workitem)
 
     end
 
     def on_cancel
 
-      key = applied_workitem.fields['params']['key']
+      key = applied_workitem.lookup('params.key')
       broker.unpublish(key)
 
     end

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 require 'ruote/storage/fs_storage'
 
@@ -29,7 +31,7 @@ describe Ruote::Synchronize::Broker do
 
     it 'raises if the key is not defined' do
       workitem.fields['params']['key'] = nil
-      expect{@participant._on_workitem(workitem)}.to raise_error
+      expect{@participant._on_workitem(workitem)}.to raise_error(Ruote::Synchronize::UndefinedKey)
     end
 
     context 'with a fresh storage' do
@@ -55,7 +57,7 @@ describe Ruote::Synchronize::Broker do
       end
 
       it 'replies to the other participant' do
-        Ruote::Synchronize::Broker.any_instance.should_receive(:receive).with(@another_participant.workitem.to_h)
+        Ruote::Synchronize::Broker.any_instance.should_receive(:receive).with(@another_participant.workitem)
         @participant._on_workitem(workitem)
       end
 

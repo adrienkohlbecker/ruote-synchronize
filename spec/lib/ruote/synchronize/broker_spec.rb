@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 
 describe Ruote::Synchronize::Broker do
@@ -6,7 +8,7 @@ describe Ruote::Synchronize::Broker do
 
     @board = Ruote::Dashboard.new(Ruote::Worker.new(Ruote::HashStorage.new))
 
-    @board.register /^block_/ do |workitem|
+    @board.register(/^block_/) do |workitem|
       workitem.fields[workitem.participant_name] = 'was here'
     end
 
@@ -42,17 +44,17 @@ describe Ruote::Synchronize::Broker do
 
     let(:sync) { Ruote::Synchronize::Broker.new(@board.context) }
     let(:key) { 'my_key' }
-    let(:workitem) { {'abc'=> true} }
+    let(:workitem) { Ruote::Workitem.new({'abc'=> true}) }
 
     context 'with a fresh storage' do
 
       it 'stores the workitem with the message' do
         sync.publish(key, workitem)
-        expect(@board.context.storage.get('synchronize', key)['workitem']).to eq(workitem)
+        expect(@board.context.storage.get('synchronize', key)['workitem']).to eq(workitem.to_h)
       end
 
       it 'returns false' do
-        expect(sync.publish(key, workitem)).to be_false
+        expect(sync.publish(key, workitem).is_a? FalseClass).to be_true
       end
 
     end
@@ -63,7 +65,7 @@ describe Ruote::Synchronize::Broker do
         sync.publish(key, workitem)
       end
 
-      let(:another_workitem) { {:def => true}  }
+      let(:another_workitem) { Ruote::Workitem.new({:def => true})  }
 
       it 'deletes the previous message' do
         sync.publish(key, another_workitem)
@@ -72,7 +74,7 @@ describe Ruote::Synchronize::Broker do
       end
 
       it 'returns true' do
-        expect(sync.publish(key, another_workitem)).to be_true
+        expect(sync.publish(key, another_workitem).is_a? TrueClass).to be_true
       end
 
       it 'receives the previous workitem' do
@@ -89,7 +91,7 @@ describe Ruote::Synchronize::Broker do
 
     let(:sync) { Ruote::Synchronize::Broker.new(@board.context) }
     let(:key) { 'my_key' }
-    let(:workitem) { {'abc'=> true} }
+    let(:workitem) { Ruote::Workitem.new({'abc'=> true}) }
 
     context 'with a fresh storage' do
 
