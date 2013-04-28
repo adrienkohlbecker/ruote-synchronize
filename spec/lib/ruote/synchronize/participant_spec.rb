@@ -26,6 +26,11 @@ describe Ruote::Synchronize::Broker do
       expect{@participant._on_workitem(workitem)}.to raise_error(Ruote::Synchronize::UndefinedKey)
     end
 
+    it 'raises if the key is an empty string' do
+      workitem.fields['params']['key'] = ''
+      expect{@participant._on_workitem(workitem)}.to raise_error(Ruote::Synchronize::UndefinedKey)
+    end
+
     context 'with a fresh storage' do
 
       it 'stores the message' do

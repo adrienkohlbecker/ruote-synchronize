@@ -13,7 +13,7 @@ module Synchronize
     def on_workitem
 
       key = workitem.lookup('params.key')
-      raise UndefinedKey if key.nil?
+      raise UndefinedKey if key.to_s.empty?
 
       reply if broker.publish(key, workitem)
 
