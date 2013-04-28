@@ -10,10 +10,6 @@ module Synchronize
 
     include Ruote::LocalParticipant
 
-    def broker
-      @broker ||= Ruote::Synchronize::Broker.new(self.context)
-    end
-
     def on_workitem
 
       key = workitem.lookup('params.key')
@@ -28,6 +24,12 @@ module Synchronize
       key = applied_workitem.lookup('params.key')
       broker.unpublish(key)
 
+    end
+
+    private
+
+    def broker
+      @broker ||= Ruote::Synchronize::Broker.new(self.context)
     end
 
   end

@@ -16,14 +16,6 @@ describe Ruote::Synchronize::Broker do
     @board.storage.purge!
   end
 
-  context '#broker' do
-
-    it 'returns a Ruote::Synchronize::Broker instance' do
-      expect(@participant.broker.class).to eq(Ruote::Synchronize::Broker)
-    end
-
-  end
-
   context '#on_workitem' do
 
     let(:workitem) { Ruote::Workitem.new({'abc' => true, 'fields' => {'params' => {'key' => 'my_key'}}}) }
